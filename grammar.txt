@@ -2,17 +2,21 @@
 # Austin Henley
 # 9/30/2020
 
-program ::= {labeldecl | instruction} 
-labeldecl ::= labelref ':' ['\n']
-instruction ::= mnemonic [operand [',' operand [',' operand]]] '\n' 
-operand ::= number | number '(' register ')' | register | labelref 
+program ::= {labeldecl | instruction | nl} 
+labeldecl ::= symbol ':' [nl]
+instruction ::= symbol [operand [',' operand [',' operand]]] nl 
+operand ::= number '(' symbol ')' | number | symbol 
 
 
-# Lexer rules in regex.
+# Lexer rules in regex-ish.
 
-nl ::= ('\r\n'|'\n'|'\r')+
+nl ::= ('\n'|'\r')+
 number ::= ('+' | '-')[0-9]+
-register ::= [a-zA-Z][a-zA-Z0-9]+
-mnemonic ::= [a-zA-Z]('.'?[a-zA-Z0-9])*
-labelref ::= [a-zA-Z0-9]+
+symbol ::= [a-zA-Z0-9]('.'?[a-zA-Z0-9])*
+
+
+# Whitespace, commas, and parantheses are token delimiters.
+# Spaces and tabs can be used interchangeably and consecutive ones are ignored.
+# Comments begin with a pound symbol and continue to a newline.
+
 
