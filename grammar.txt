@@ -4,8 +4,8 @@
 
 program ::= {[label] [directive | instruction] [comment] newline}
 label ::= symbol ':'
-directive ::= '.' symbol {',' symbol}
-instruction ::= symbol {',' operand}
+directive ::= '.' symbol [symbol {',' symbol}]
+instruction ::= symbol [operand {',' operand}]
 operand ::= ['+' | '-'] symbol '(' symbol ')' | symbol
 
 # Lexer rules in regex-ish.
