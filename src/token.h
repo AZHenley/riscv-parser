@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 
-enum class TokenType {
-    Symbol,
+enum TokenType {
+    Symbol = 0,
     Lparen,
     Rparen,
     Plus,
@@ -14,6 +14,8 @@ enum class TokenType {
     Comment,
     EndOfFile
 };
+
+const char* const TokenTypeStrings[] = {"Symbol", "Left-Parenthesis", "Right-Parenthesis", "Plus", "Minus", "Dot", "Colon", "Comma", "Newline", "Comment", "End-Of-File"};
 
 class Token {
 public:
