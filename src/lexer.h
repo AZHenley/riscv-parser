@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include "token.h"
 
@@ -15,9 +16,7 @@ private:
     bool IsSpace();
     void SkipSpaces();
 
-
 public:
-    Token* token; // Most recent token from NextToken().
     Lexer(std::string source);
     Token* NextToken();
 };

@@ -97,7 +97,6 @@ Token* Lexer::NextToken() {
                 }
             }
     }
-    token = t;
     return t;
 }
 
