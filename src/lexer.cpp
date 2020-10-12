@@ -59,8 +59,12 @@ Token* Lexer::NextToken() {
             t->type = TokenType::Dot;
             NextChar();
             break;
-        case ':':
+        case ',':
             t->type = TokenType::Comma;
+            NextChar();
+            break;
+        case ':':
+            t->type = TokenType::Colon;
             NextChar();
             break;
         case '#':
