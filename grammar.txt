@@ -1,18 +1,18 @@
 # Minimal RISC-V assembly grammar in EBNF.
 # Austin Henley
-# 10/5/2020
+# 10/11/2020
 
 program ::= {[label] [directive | instruction] [comment] newline}
 label ::= symbol ':'
 directive ::= '.' symbol {',' symbol}
 instruction ::= symbol {',' operand}
-operand ::= number '(' symbol ')' | symbol
+operand ::= ['+' | '-'] symbol '(' symbol ')' | symbol
 
 # Lexer rules in regex-ish.
-newline ::= ('\n'|'\r')+
-number ::= ('+' | '-')[0-9]+
+newline ::= [\n\r]+
+comment ::= [^\n\r]+
 symbol ::= ([a-zA-Z0-9]('.'?[a-zA-Z0-9])*) | (\"(\\[^\n]|[^"\n])*\")
 
-# Whitespace, commas, and parantheses are token delimiters.
+# Whitespace, commas, colons, and parantheses are token delimiters.
 # Spaces and tabs can be used interchangeably and consecutively.
-# Symbols, numbers, and number of arguments can be differentiated later.
+# Correctness of symbols and the number of arguments will be verified later.
