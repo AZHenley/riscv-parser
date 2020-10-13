@@ -10,7 +10,7 @@ operand ::= ['+' | '-'] (symbol '(' symbol ')' | symbol)
 
 # Lexer rules in regex-ish.
 newline ::= [\n\r]+
-comment ::= [^\n\r]+
+comment ::= #[^\n\r]+
 symbol ::= ([a-zA-Z0-9]('.'?[a-zA-Z0-9])*) | (\"(\\[^\n]|[^"\n])*\")
 
 # Whitespace, commas, colons, and parantheses are token delimiters.
