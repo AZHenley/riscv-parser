@@ -67,10 +67,18 @@ void Parser::Directive() {
 
     // Is there at least one operand?
     if(!CheckToken(TokenType::Newline) && !CheckToken(TokenType::Comment)) {
+        // Does the first operand have a dot? Plus or minus?
+        if(CheckToken(TokenType::Dot) || CheckToken(TokenType::Plus) || CheckToken(TokenType::Minus)) {
+            NextToken();
+        }
         Match(TokenType::Symbol);
         // Zero or more operands.
         while(CheckToken(TokenType::Comma)) {
             NextToken();
+            // Is there a plus or minus?
+            if(CheckToken(TokenType::Plus) || CheckToken(TokenType::Minus)) {
+                NextToken();
+            }
             Match(TokenType::Symbol);
         }
     }
@@ -91,18 +99,18 @@ void Parser::Instruction() {
 }
 
 void Parser::Operand() {
+    // Optional sign.
+    if(CheckToken(TokenType::Plus) || CheckToken(TokenType::Minus)) {
+        NextToken();
+    }
+
     // Only a symbol.
     if(CheckToken(TokenType::Symbol) && !CheckPeek(TokenType::Lparen)) {
         NextToken();
     }
-    // ['+' | '-'] symbol '(' symbol ')'
+    // symbol '(' symbol ')'
     else {
-        // Optional sign.
-        if(CheckToken(TokenType::Plus) || CheckToken(TokenType::Minus)) {
-            NextToken();
-        }
-
-        Match(TokenType::Symbol); // TODO: Check that this is a number.
+        Match(TokenType::Symbol); 
         Match(TokenType::Lparen);
         Match(TokenType::Symbol);
         Match(TokenType::Rparen);
